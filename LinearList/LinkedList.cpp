@@ -20,6 +20,18 @@ private:
 	int length;
 	LinkNode* HeadNode;
 
+	// 反转链表辅助
+	LinkNode* reverseNode(LinkNode* head) {
+		if (head->next == nullptr)
+			return head;
+
+		LinkNode* newHead = reverseNode(head->next);
+		LinkNode* nextNode = head->next;
+		head->next = nextNode->next;
+		nextNode->next = head;
+		return newHead;
+	}
+
 public:
 
 	LinkedList() {
@@ -218,7 +230,10 @@ public:
 		cout<< "链表已清空！！！！"<< endl;
 	}
 
-	// 倒序
+	// 反转连表
+	void reverse() {
+		this->HeadNode->next = reverseNode(this->HeadNode->next);
+	}
 
 	// 打印链表
 	void printLink() {
